@@ -2,6 +2,7 @@ return {
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
+    disabled = true,
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
       {

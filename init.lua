@@ -259,23 +259,32 @@ vim.keymap.set('n', '<leader>m', ':NvimTreeToggle<CR>', {
 })
 
 -- open terminal
-local job_id = 0
-vim.keymap.set('n', '<leader>tz', function()
-  vim.cmd.vnew()
-  vim.cmd.term()
-  job_id = vim.bo.channel
-end)
-vim.keymap.set('n', '<leader>tq', function()
-  vim.fn.chansend(job_id, 'ls -la\n')
-end)
-vim.keymap.set('n', '<leader>te', ':ToggleTerm direction=vertical size=100<CR>', {
+local term_job_id = 0
+vim.keymap.set('n', '<leader>te', function()
+  -- vim.cmd.vnew()
+  vim.cmd 'ToggleTerm direction=vertical size=90'
+  term_job_id = vim.bo.channel
+end, {
   noremap = true,
   desc = 'Open terminal',
 })
+vim.keymap.set('n', '<leader>tv', function()
+  vim.fn.chansend(term_job_id, 'python -m venv env && source env/bin/activate\n')
+end, {
+  noremap = true,
+  desc = 'Python venv',
+})
 
+vim.keymap.set('n', '<leader>tp', function()
+  vim.fn.chansend(term_job_id, 'python -m pytest\n')
+end, {
+  noremap = true,
+  desc = 'Python venv',
+})
 -- leap to 2 letters
 vim.keymap.set('n', 's', '<Plug>(leap)', { desc = 'leap two letter jump' })
 vim.keymap.set('n', 'S', '<Plug>(leap-from-window)', { desc = 'leap two letter jump accross windows' })
+
 ------------------ end custom -------------------------
 -- empty setup using defaults
 
@@ -319,11 +328,10 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
-  'ggandor/leap.nvim',
+  -- 'ggandor/leap.nvim',
   'mfussenegger/nvim-lint',
   'rafamadriz/friendly-snippets',
   'simrat39/rust-tools.nvim',
-  'ThePrimeagen/vim-be-good',
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
   -- keys can be used to configure plugin behavior/loading/etc.
