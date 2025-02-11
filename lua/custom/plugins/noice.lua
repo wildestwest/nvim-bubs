@@ -28,6 +28,11 @@ return {
       long_message_to_split = true,
     },
   },
+  dependencies = {
+    -- if you lazy-load any plugin below, make sure to add proper `module="..." entries
+    'MunifTanjim/nui.nvim',
+    'rcarriga/nvim-notify',
+  },
   -- stylua: ignore
   -- keys = {
   --   { "<leader>sn", "", desc = "+noice"},
