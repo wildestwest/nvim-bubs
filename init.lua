@@ -90,7 +90,7 @@ P.S. You can delete this when you're done too. It's your config now! :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- disable netrw at the very start of your init.lua to avoid butting heads with nvimtree
+-- disable netrw at the very start of your init.lua to avoid butting heads with nvimtree test
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
