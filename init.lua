@@ -246,7 +246,7 @@ vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]], { desc = 'copy to sys' })
 vim.keymap.set('n', '<leader>Y', [["+Y]], { desc = 'copy to vim' })
 
 -- delete to void buffer
-vim.keymap.set({ 'n', 'v' }, '<leader>d', [["_d]], { desc = 'Delete to void buffer' })
+vim.keymap.set({ 'n', 'v' }, '<leader><Del>', [["_d]], { desc = 'Delete to void buffer' })
 
 -- format file
 vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { desc = 'run format on current buffer' })
@@ -260,11 +260,8 @@ vim.keymap.set('n', '<leader>j', '<cmd>lprev<CR>zz', { desc = 'quik fix lnext' }
 -- replace word cursor was on
 vim.keymap.set('n', '<leader>r', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'replace word cursor is on' })
 
--- make file executable
-vim.keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>', { silent = true, desc = 'Make file executable' })
-
 -- open file tree
-vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', {
+vim.keymap.set('n', '<leader>e', ':Oil<CR>', {
   noremap = true,
   desc = 'Open file tree',
 })
@@ -290,7 +287,7 @@ vim.keymap.set('n', '<leader>tp', function()
   vim.fn.chansend(term_job_id, 'python -m pytest\n')
 end, {
   noremap = true,
-  desc = 'Python venv',
+  desc = 'pytest',
 })
 -- leap to 2 letters
 vim.keymap.set('n', 's', '<Plug>(leap)', { desc = 'leap two letter jump' })
