@@ -264,7 +264,7 @@ vim.keymap.set('n', '<leader>r', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>', { silent = true, desc = 'Make file executable' })
 
 -- open file tree
-vim.keymap.set('n', '<leader>m', ':NvimTreeToggle<CR>', {
+vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', {
   noremap = true,
   desc = 'Open file tree',
 })
@@ -295,6 +295,8 @@ end, {
 -- leap to 2 letters
 vim.keymap.set('n', 's', '<Plug>(leap)', { desc = 'leap two letter jump' })
 vim.keymap.set('n', 'S', '<Plug>(leap-from-window)', { desc = 'leap two letter jump accross windows' })
+
+vim.keymap.set('n', '<leader>tc', ':TimerlyToggle<CR>', { desc = 'toggle timer' })
 
 ------------------ end custom -------------------------
 -- empty setup using defaults

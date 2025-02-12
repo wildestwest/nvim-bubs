@@ -1,7 +1,7 @@
 return {
   {
     'Ramilito/kubectl.nvim',
-    enabled = false,
+    enabled = false, -- Ive basically replaced this with running k9s in a floating terminal (see plugin directory)
     opts = {
       {
         log_level = vim.log.levels.INFO,
