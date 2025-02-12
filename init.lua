@@ -261,11 +261,12 @@ vim.keymap.set('n', '<leader>j', '<cmd>lprev<CR>zz', { desc = 'quik fix lnext' }
 vim.keymap.set('n', '<leader>r', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'replace word cursor is on' })
 
 -- open file tree
-vim.keymap.set('n', '<leader>e', ':Oil<CR>', {
-  noremap = true,
-  desc = 'Open file tree',
-})
-
+-- vim.keymap.set('n', '<leader>e', ':Oil<CR>', {
+--   noremap = true,
+--   desc = 'Open file tree',
+-- })
+--
+vim.api.nvim_set_keymap('n', '<leader>e', [[<cmd>lua require("oil").toggle_float()<CR>]], { noremap = true, silent = true, desc = 'Toggle Oil float' })
 -- open terminal
 local term_job_id = 0
 vim.keymap.set('n', '<leader>te', function()
