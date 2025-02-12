@@ -254,8 +254,8 @@ vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { desc = 'run format on cur
 -- quik fix nav
 vim.keymap.set('n', '<C-k>', '<cmd>cnext<CR>zz', { desc = 'quik fix next' })
 vim.keymap.set('n', '<C-j>', '<cmd>cprev<CR>zz', { desc = 'quik fix prev' })
-vim.keymap.set('n', '<leader>k', '<cmd>lnext<CR>zz', { desc = 'quik fix lnext' })
-vim.keymap.set('n', '<leader>j', '<cmd>lprev<CR>zz', { desc = 'quik fix lnext' })
+-- vim.keymap.set('n', '<leader>k', '<cmd>lnext<CR>zz', { desc = 'quik fix lnext' })
+-- vim.keymap.set('n', '<leader>j', '<cmd>lprev<CR>zz', { desc = 'quik fix lnext' })
 
 -- replace word cursor was on
 vim.keymap.set('n', '<leader>r', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'replace word cursor is on' })
