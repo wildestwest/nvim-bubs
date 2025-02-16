@@ -1,3 +1,5 @@
+-- these are based on the home row for me as I use the engramm keyboard layout.
+
 return {
   {
     'ThePrimeagen/harpoon',
@@ -8,7 +10,7 @@ return {
 
       harpoon:setup()
 
-      vim.keymap.set('n', '<leader>a', function()
+      vim.keymap.set('n', '<leader>-', function()
         harpoon:list():add()
       end, { desc = 'harpoon add' })
       vim.keymap.set('n', '<leader><C-,>', function()
