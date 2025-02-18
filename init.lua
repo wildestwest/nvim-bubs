@@ -295,7 +295,22 @@ vim.keymap.set('n', 's', '<Plug>(leap)', { desc = 'leap two letter jump' })
 vim.keymap.set('n', 'S', '<Plug>(leap-from-window)', { desc = 'leap two letter jump accross windows' })
 
 vim.keymap.set('n', '<leader>tc', ':TimerlyToggle<CR>', { desc = 'toggle timer' })
-
+vim.keymap.set('n', '<leader>qq', function()
+  -- vim.cmd.vnew()
+  vim.cmd 'qall'
+  term_job_id = vim.bo.channel
+end, {
+  noremap = true,
+  desc = 'Close all Buffers',
+})
+vim.keymap.set('n', '<leader>ww', function()
+  -- vim.cmd.vnew()
+  vim.cmd 'wall'
+  term_job_id = vim.bo.channel
+end, {
+  noremap = true,
+  desc = 'Save all Buffers',
+})
 ------------------ end custom -------------------------
 -- empty setup using defaults
 
