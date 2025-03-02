@@ -388,6 +388,15 @@ require('lazy').setup({
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+      require('lualine').setup {
+        extensions = { 'quickfix', 'lazy', 'toggleterm', 'trouble' },
+      }
+    end,
+  },
 
   -- Plugins with real confiuration are here
   { import = 'custom.plugins' },
