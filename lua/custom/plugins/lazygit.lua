@@ -1,7 +1,6 @@
 return {
   {
     'kdheepak/lazygit.nvim',
-    enabled = false, -- snacks does this now
     cmd = {
       'LazyGit',
       'LazyGitConfig',

@@ -246,7 +246,7 @@ vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]], { desc = 'copy to sys' })
 vim.keymap.set('n', '<leader>Y', [["+Y]], { desc = 'copy to vim' })
 
 -- delete to void buffer
-vim.keymap.set({ 'n', 'v' }, '<leader><Del>', [["_d]], { desc = 'Delete to void buffer' })
+vim.keymap.set({ 'n', 'v' }, '<leader>d', [["_d]], { desc = 'Delete to void buffer' })
 
 -- format file
 vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { desc = 'run format on current buffer' })
@@ -259,58 +259,17 @@ vim.keymap.set('n', '<C-j>', '<cmd>cprev<CR>zz', { desc = 'quik fix prev' })
 
 -- replace word cursor was on
 vim.keymap.set('n', '<leader>r', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'replace word cursor is on' })
+function _G.set_terminal_keymaps()
+  -- Exit terminal mode
+  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], { buffer = 0 })
+  -- Terminal window navigation
+  vim.keymap.set('t', '<C-h>', [[<C-\><C-n><C-W>h]], { buffer = 0 })
+  vim.keymap.set('t', '<C-j>', [[<C-\><C-n><C-W>j]], { buffer = 0 })
+  vim.keymap.set('t', '<C-k>', [[<C-\><C-n><C-W>k]], { buffer = 0 })
+  vim.keymap.set('t', '<C-l>', [[<C-\><C-n><C-W>l]], { buffer = 0 })
+end
+vim.cmd 'autocmd! TermOpen term://* lua set_terminal_keymaps()'
 
--- open file tree
--- vim.keymap.set('n', '<leader>e', ':Oil<CR>', {
---   noremap = true,
---   desc = 'Open file tree',
--- })
---
-vim.api.nvim_set_keymap('n', '<leader>e', [[<cmd>lua require("oil").toggle_float()<CR>]], { noremap = true, silent = true, desc = 'Toggle Oil float' })
--- open terminal
-local term_job_id = 0
-vim.keymap.set('n', '<leader>te', function()
-  -- vim.cmd.vnew()
-  vim.cmd 'ToggleTerm direction=vertical size=90'
-  term_job_id = vim.bo.channel
-end, {
-  noremap = true,
-  desc = 'Open terminal',
-})
-vim.keymap.set('n', '<leader>tv', function()
-  vim.fn.chansend(term_job_id, 'python -m venv env && source env/bin/activate\n')
-end, {
-  noremap = true,
-  desc = 'Python venv',
-})
-
-vim.keymap.set('n', '<leader>tp', function()
-  vim.fn.chansend(term_job_id, 'python -m pytest\n')
-end, {
-  noremap = true,
-  desc = 'pytest',
-})
--- leap to 2 letters
-vim.keymap.set('n', 's', '<Plug>(leap)', { desc = 'leap two letter jump' })
-vim.keymap.set('n', 'S', '<Plug>(leap-from-window)', { desc = 'leap two letter jump accross windows' })
-
-vim.keymap.set('n', '<leader>tc', ':TimerlyToggle<CR>', { desc = 'toggle timer' })
-vim.keymap.set('n', '<leader>qq', function()
-  -- vim.cmd.vnew()
-  vim.cmd 'qall'
-  term_job_id = vim.bo.channel
-end, {
-  noremap = true,
-  desc = 'Close all Buffers',
-})
-vim.keymap.set('n', '<leader>ww', function()
-  -- vim.cmd.vnew()
-  vim.cmd 'wall'
-  term_job_id = vim.bo.channel
-end, {
-  noremap = true,
-  desc = 'Save all Buffers',
-})
 ------------------ end custom -------------------------
 -- empty setup using defaults
 
@@ -367,7 +326,6 @@ require('lazy').setup({
 
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
-  { 'akinsho/toggleterm.nvim', version = '*', config = true },
 
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following Lua:
@@ -409,23 +367,24 @@ require('lazy').setup({
       },
     },
   },
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is.
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'catppuccin/nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
-    init = function()
-      -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'catppuccin'
-
-      -- You can configure highlights by doing something like:
-      vim.cmd.hi 'Comment gui=none'
-    end,
-  },
+  -- { -- You can easily change to a different colorscheme.
+  --   -- Change the name of the colorscheme plugin below, and then
+  --   -- change the command in the config to whatever the name of that colorscheme is.
+  --   --
+  --   -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
+  --   'catppuccin/nvim',
+  --   priority = 1000, -- Make sure to load this before all the other start plugins.
+  --   init = function()
+  --     -- Load the colorscheme here.
+  --     -- Like many other themes, this one has different styles, and you could load
+  --     -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
+  --     vim.cmd.colorscheme 'catppuccin'
+  --
+  --     -- You can configure highlights by doing something like:
+  --     vim.cmd.hi 'Comment gui=none'
+  --   end,
+  -- },
+  --
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },

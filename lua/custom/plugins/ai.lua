@@ -3,8 +3,9 @@ return {
     'yetone/avante.nvim',
     event = 'VeryLazy',
     dependencies = {
-      -- 'stevearc/dressing.nvim',
+      'stevearc/dressing.nvim',
       'ibhagwan/fzf-lua',
+      'MunifTanjim/nui.nvim',
     },
     opts = {
       -- Default configuration
@@ -23,48 +24,48 @@ return {
       -- File selector configuration
       --- @alias FileSelectorProvider "native" | "fzf" | "mini.pick" | "snacks" | "telescope" | string
       file_selector = {
-        provider = 'snacks', -- Avoid native provider issues
+        provider = 'telescope', -- Avoid native provider issues
         provider_opts = {},
       },
     },
     build = 'make',
   },
-  {
-    'saghen/blink.cmp',
-    lazy = true,
-    dependencies = { 'saghen/blink.compat' },
-    opts = {
-      sources = {
-        default = { 'avante_commands', 'avante_mentions', 'avante_files' },
-        compat = {
-          'avante_commands',
-          'avante_mentions',
-          'avante_files',
-        },
-        -- LSP score_offset is typically 60
-        providers = {
-          avante_commands = {
-            name = 'avante_commands',
-            module = 'blink.compat.source',
-            score_offset = 90,
-            opts = {},
-          },
-          avante_files = {
-            name = 'avante_files',
-            module = 'blink.compat.source',
-            score_offset = 100,
-            opts = {},
-          },
-          avante_mentions = {
-            name = 'avante_mentions',
-            module = 'blink.compat.source',
-            score_offset = 1000,
-            opts = {},
-          },
-        },
-      },
-    },
-  },
+  -- {
+  --   'saghen/blink.cmp',
+  --   lazy = true,
+  --   dependencies = { 'saghen/blink.compat' },
+  --   opts = {
+  --     sources = {
+  --       default = { 'avante_commands', 'avante_mentions', 'avante_files' },
+  --       compat = {
+  --         'avante_commands',
+  --         'avante_mentions',
+  --         'avante_files',
+  --       },
+  --       -- LSP score_offset is typically 60
+  --       providers = {
+  --         avante_commands = {
+  --           name = 'avante_commands',
+  --           module = 'blink.compat.source',
+  --           score_offset = 90,
+  --           opts = {},
+  --         },
+  --         avante_files = {
+  --           name = 'avante_files',
+  --           module = 'blink.compat.source',
+  --           score_offset = 100,
+  --           opts = {},
+  --         },
+  --         avante_mentions = {
+  --           name = 'avante_mentions',
+  --           module = 'blink.compat.source',
+  --           score_offset = 1000,
+  --           opts = {},
+  --         },
+  --       },
+  --     },
+  --   },
+  -- },
   {
     'MeanderingProgrammer/render-markdown.nvim',
     optional = true,

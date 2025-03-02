@@ -1,7 +1,22 @@
+local minifiles_toggle = function(...)
+  if not MiniFiles.close() then
+    MiniFiles.open(...)
+  end
+end
+
 return {
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     enabled = true,
+    keys = {
+      {
+        '<leader>e',
+        function()
+          minifiles_toggle(vim.api.nvim_buf_get_name(0), true)
+        end,
+        desc = 'Toggle mini.files (Directory of Current File)',
+      },
+    },
     config = function()
       -- Better Around/Inside textobjects
       --
@@ -18,6 +33,7 @@ return {
       require('mini.surround').setup()
 
       require('mini.pairs').setup()
+      require('mini.files').setup()
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
