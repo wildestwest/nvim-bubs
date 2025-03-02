@@ -261,7 +261,7 @@ vim.keymap.set('n', '<C-j>', '<cmd>cprev<CR>zz', { desc = 'quik fix prev' })
 vim.keymap.set('n', '<leader>r', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'replace word cursor is on' })
 function _G.set_terminal_keymaps()
   -- Exit terminal mode
-  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], { buffer = 0 })
+  vim.keymap.set('t', '<esc><esc>', [[<C-\><C-n>]], { buffer = 0 })
   -- Terminal window navigation
   vim.keymap.set('t', '<C-h>', [[<C-\><C-n><C-W>h]], { buffer = 0 })
   vim.keymap.set('t', '<C-j>', [[<C-\><C-n><C-W>j]], { buffer = 0 })

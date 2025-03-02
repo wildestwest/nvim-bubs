@@ -1,34 +1,3 @@
----@param on_attach fun(client:vim.lsp.Client, buffer)
----@param name? string
-function on_attach(on_attach, name)
-  return vim.api.nvim_create_autocmd('LspAttach', {
-    callback = function(args)
-      local buffer = args.buf ---@type number
-      local client = vim.lsp.get_client_by_id(args.data.client_id)
-      if client and (not name or client.name == name) then
-        return on_attach(client, buffer)
-      end
-    end,
-  })
-end
-
-action = setmetatable({}, {
-  __index = function(_, action)
-    return function()
-      vim.lsp.buf.code_action {
-        apply = true,
-        context = {
-          only = { action },
-          diagnostics = {},
-        },
-      }
-    end
-  end,
-})
-
-local lsp = vim.g.lazyvim_python_lsp or 'pyright'
-local ruff = vim.g.lazyvim_python_ruff or 'ruff'
-
 return {
   {
     'nvim-treesitter/nvim-treesitter',
@@ -38,40 +7,9 @@ return {
     'neovim/nvim-lspconfig',
     opts = {
       servers = {
-        ruff = {
-          cmd_env = { RUFF_TRACE = 'messages' },
-          init_options = {
-            settings = {
-              logLevel = 'error',
-            },
-          },
-          keys = {
-            {
-              '<leader>co',
-              action['source.organizeImports'],
-              desc = 'Organize Imports',
-            },
-          },
-        },
-      },
-      setup = {
-        [ruff] = function()
-          on_attach(function(client, _)
-            -- Disable hover in favor of Pyright
-            client.server_capabilities.hoverProvider = false
-          end, ruff)
-        end,
+        ruff = {},
+        basedpyright = {},
       },
     },
-  },
-  {
-    'neovim/nvim-lspconfig',
-    opts = function(_, opts)
-      local servers = { 'basedpyright', 'ruff' }
-      for _, server in ipairs(servers) do
-        opts.servers[server] = opts.servers[server] or {}
-        opts.servers[server].enabled = server == lsp or server == ruff
-      end
-    end,
   },
 }
